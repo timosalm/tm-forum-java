@@ -10,7 +10,7 @@ accelerator:
     - name: companyPkg
       label: Package name
       inputType: text
-      defaultVaule: "com.vodafone"
+      defaultValue: "com.vodafone"
       required: true
 engine:
   merge:
