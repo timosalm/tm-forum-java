@@ -13,22 +13,22 @@ accelerator:
       defaultValue: "com.vodafone"
       required: true
     - name: gitUrl
-      label: Git Repository URL
+      label: Git repository URL
       display: true
-      description: Git Repository URL of the application's source code
+      description: Git repository URL of the application's source code
       inputType: text
       dataType: string
       defaultValue: "https://github.com/tsalm-pivotal/tm-forum-java.git"
     - name: gitBranch
-      label: Git epository Branch
+      label: Git repository branch
       display: true
-      description: Git Repository Branch of the application's source code
+      description: Git repository branch of the application's source code
       inputType: text
       dataType: string
       defaultValue: "main"
 engine:
   merge:
-  - exclude: [ "accelerator-deployment.yaml" ]
+  - exclude: [ "accelerator-deployment.yaml", ".dcignore", ".swagger-codegen-ignore", ".swagger-codegen/*", "accelerator-log.md" ]
   - include: [ "config/workload.yaml" ]
     chain:
     - type: ReplaceText
