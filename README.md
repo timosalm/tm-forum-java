@@ -25,6 +25,10 @@ Change in the readme.md to test the CI/CD
 
 ## Accelerator deployment
 ```
- tanzu accelerator create tmf-product-catalog-management-api-java --git-repository https://github.com/tsalm-pivotal/tm-forum-java.git --git-branch main
+tanzu accelerator apply -f accelerator-deployment.yaml
+```
+or
+```
+tanzu accelerator create tmf-product-catalog-management-api-java --git-repository https://github.com/tsalm-pivotal/tm-forum-java.git --git-branch main
 ```
 
