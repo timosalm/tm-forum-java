@@ -23,3 +23,8 @@ http://localhost:8080/
 Change default port value in application.properties
 Change in the readme.md to test the CI/CD
 
+## Accelerator deployment
+```
+ tanzu accelerator create tmf-product-catalog-management-api-java --git-repository https://github.com/tsalm-pivotal/tm-forum-java.git --git-branch main
+```
+
