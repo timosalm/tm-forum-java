@@ -7,7 +7,7 @@ accelerator:
     - spring
     - tmf620
   options:
-    - name: companyPkg
+    - name: pkgName
       label: Package name
       inputType: text
       defaultValue: "com.vodafone"
@@ -28,7 +28,7 @@ accelerator:
       defaultValue: "main"
 engine:
   merge:
-  - exclude: [ "accelerator-deployment.yaml", ".dcignore", ".swagger-codegen-ignore", ".swagger-codegen/*", "accelerator-log.md" ]
+  - exclude: [ '**/*.java', "accelerator-deployment.yaml", ".dcignore", ".swagger-codegen-ignore", ".swagger-codegen/*" ]
   - include: [ "config/workload.yaml" ]
     chain:
     - type: ReplaceText
@@ -39,4 +39,12 @@ engine:
         with: "#gitBranch"
       - text: tmf-product-catalog-management-api
         with: "#artifactId"
+  - include: [ "**/*.java" ]
+    chain:
+    - type: OpenRewriteRecipe
+      recipe: org.openrewrite.java.ChangePackage
+      options:
+        oldFullyQualifiedPackageName: "'io.swagger'"
+        newFullyQualifiedPackageName: "#pkgName"
+        recursive: true
 
