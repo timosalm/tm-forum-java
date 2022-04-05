@@ -6,6 +6,18 @@ accelerator:
     - java
     - spring
     - tmf620
+  options:
+    name: companyPkg
+    inputType: text
+    defaultVaule: "com.vodafone"
+    required: true
   engine:
-    exclude:
-      [ "accelerator-deployment.yaml" ]
+    exclude: [ "accelerator-deployment.yaml" ]
+    chain:
+      - include: [ "**/*.java" ]
+      - type: OpenRewriteRecipe
+        recipe: org.openrewrite.java.ChangePackage
+        options:
+          oldFullyQualifiedPackageName: "'io.swagger'"
+          newFullyQualifiedPackageName: "#companyPkg"
+          recursive: true
