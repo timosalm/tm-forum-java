@@ -1,0 +1,8 @@
+accelerator:
+  displayName: TMF Product Catalog Management API (Java)
+  description: Provides a standardized solution for rapidly adding partners’ products to an existing Catalog. It brings the capability for Service Providers to directly feed partners systems with the technical description of the products they propose to them.
+  iconUrl: https://projects.tmforum.org/wiki/download/attachments/35359579/API?version=3&modificationDate=1531062677000&api=v2
+  tags:
+    - java
+    - spring
+    - tmf620
