@@ -15,8 +15,8 @@ accelerator:
 engine:
   merge:
   - exclude: [ "accelerator-deployment.yaml" ]
-  - chain:
-    - include: [ "**/*.java" ]
+  - include: [ "**/*.java" ]
+    chain:
     - type: OpenRewriteRecipe
       recipe: org.openrewrite.java.ChangePackage
       options:
