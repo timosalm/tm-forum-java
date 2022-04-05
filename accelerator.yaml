@@ -6,3 +6,6 @@ accelerator:
     - java
     - spring
     - tmf620
+  engine:
+    exclude:
+      [ "accelerator-deployment.yaml" ]
