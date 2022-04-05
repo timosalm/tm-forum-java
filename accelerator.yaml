@@ -8,12 +8,14 @@ accelerator:
     - tmf620
   options:
     - name: companyPkg
+      label: Package name
       inputType: text
       defaultVaule: "com.vodafone"
       required: true
 engine:
-  exclude: [ "accelerator-deployment.yaml" ]
-  chain:
+  merge:
+  - exclude: [ "accelerator-deployment.yaml" ]
+  - chain:
     - include: [ "**/*.java" ]
     - type: OpenRewriteRecipe
       recipe: org.openrewrite.java.ChangePackage
