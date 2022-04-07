@@ -47,4 +47,4 @@ engine:
         with: "#pkgName"
     - type: RewritePath
       regex: src/main/java/io/swagger/(.*)
-      rewriteTo: "'src/main/java/' + #pkgName + #g1"
+      rewriteTo: "'src/main/java/' + #pkgName + '/' + #g1"
