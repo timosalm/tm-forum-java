@@ -67,11 +67,9 @@ engine:
   - include: [ "**/*.java" ]
     chain:
     - type: ReplaceText
-      substitutions:
-      - type: ReplaceText
-        regex:
-          pattern: io.swagger(?!.annotations)
-          with: "#pkgName"
+      regex:
+        pattern: io.swagger(?!.annotations)
+        with: "#pkgName"
     - type: RewritePath
       regex: src/main/java/io/swagger/(.*)
       rewriteTo: "'src/main/java/' + #pkgName.replace('.', '/') + '/' + #g1"
