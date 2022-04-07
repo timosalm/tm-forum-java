@@ -12,6 +12,30 @@ accelerator:
       inputType: text
       defaultValue: "com.vodafone"
       required: true
+    - name: javaVersion
+      label: Java version
+      inputType: radio
+      defaultValue: "11"
+      choices:
+        - value: 8
+          text: 8
+        - value: 11
+          text: 11
+        - value: 17
+          text: 17
+      required: true
+    - name: springBootVersion
+      label: Spring Boot version
+      inputType: select
+      choices:
+      - value: 2.5.12
+        text: 2.5.12
+      - value: 2.6.6
+        text: 2.6.6
+      - value: 3.0.0-M2
+        text: 3.0.0 (M2)
+      defaultValue: "2.6.6"
+      required: true
     - name: gitUrl
       label: Git repository URL
       display: true
@@ -48,3 +72,15 @@ engine:
     - type: RewritePath
       regex: src/main/java/io/swagger/(.*)
       rewriteTo: "'src/main/java/' + #pkgName + '/' + #g1"
+  - include: [ "pom.xml" ]
+    chain:
+      - type: ReplaceText
+        substitutions:
+        - text: <groupId>io.swagger</groupId>
+          with: "<groupId>#pkgName</groupId>"
+        - text: swagger-spring
+          with: "#artifactId"
+        - text: <java.version>1.7</java.version>
+          with: "<java.version>#javaVersion</java.version>"
+        - text: <version>1.5.9.RELEASE</version>
+          with: "<version>#springBootVersion</version>"
