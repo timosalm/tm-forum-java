@@ -15,6 +15,7 @@ accelerator:
     - name: javaVersion
       label: Java version
       inputType: radio
+      dataType: number
       defaultValue: 11
       choices:
         - value: 8
