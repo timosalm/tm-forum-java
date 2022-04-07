@@ -77,11 +77,11 @@ engine:
     chain:
       - type: ReplaceText
         substitutions:
-        - text: <groupId>io.swagger</groupId>
+        - text: "<groupId>io.swagger</groupId>"
           with: "<groupId>#pkgName</groupId>"
         - text: swagger-spring
           with: "#artifactId"
-        - text: <java.version>1.7</java.version>
-          with: "'<java.version>' + #javaVersion' + '</java.version>'"
-        - text: <version>1.5.9.RELEASE</version>
-          with: "'<version>' + #springBootVersion' + '</version>'"
+        - text: "<java.version>1.7</java.version>"
+          with: "'<java.version>' + #javaVersion + '</java.version>'"
+        - text: "<version>1.5.9.RELEASE</version>"
+          with: "'<version>' + #springBootVersion + '</version>'"
