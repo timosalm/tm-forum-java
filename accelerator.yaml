@@ -78,7 +78,7 @@ engine:
       - type: ReplaceText
         substitutions:
         - text: "<groupId>io.swagger</groupId>"
-          with: "<groupId>#pkgName</groupId>"
+          with: "'<groupId>' + #pkgName + '</groupId>'"
         - text: swagger-spring
           with: "#artifactId"
         - text: "<java.version>1.7</java.version>"
