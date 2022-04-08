@@ -64,7 +64,7 @@ engine:
         with: "#gitBranch"
       - text: tmf-product-catalog-management-api
         with: "#artifactId"
-  - include: [ "**/*.java" ]
+  - include: [ "**/*.java", "**/*.properties" ]
     chain:
     - type: ReplaceText
       regex:
