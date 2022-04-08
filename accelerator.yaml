@@ -68,7 +68,7 @@ engine:
     chain:
     - type: ReplaceText
       regex:
-        pattern: io.swagger(?!.annotations)
+        pattern: io.swagger(?!.annotations|.codegen)
         with: "#pkgName"
     - type: RewritePath
       regex: src/main/java/io/swagger/(.*)
