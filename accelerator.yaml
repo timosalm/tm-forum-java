@@ -19,7 +19,7 @@ accelerator:
       defaultValue: 11
       choices:
         - value: 8
-          text: 8
+          text: 1.8
         - value: 11
           text: 11
         - value: 17
