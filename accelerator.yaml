@@ -85,3 +85,9 @@ engine:
           with: "'<java.version>' + #javaVersion + '</java.version>'"
         - text: "<version>2.6.2</version>"
           with: "'<version>' + #springBootVersion + '</version>'"
+  - include: [ "catalog/catalog-info.yaml" ]
+    chain:
+    - type: ReplaceText
+      substitutions:
+        - text: tmf-product-catalog-management-api
+          with: "#artifactId"
