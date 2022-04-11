@@ -77,7 +77,7 @@ engine:
     chain:
       - type: ReplaceText
         substitutions:
-        - text: "<groupId>org.openapitools</groupId>"
+        - text: "<groupId>com.vodafone</groupId>"
           with: "'<groupId>' + #pkgName + '</groupId>'"
         - text: tmf-product-catalog-management-api
           with: "#artifactId"
