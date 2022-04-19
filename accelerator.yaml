@@ -59,7 +59,7 @@ accelerator:
       dataType: string
       defaultValue: "dev-space"
     - name: apiSpecLocation
-      label: Spring Boot version
+      label: API specification location
       inputType: select
       choices:
       - value: local
@@ -74,7 +74,7 @@ accelerator:
       defaultValue: "'https://' + #artifactId + '-' + #namespace + '.cnr.emea.end2end.link'"
       dependsOn:
         name: apiSpecLocation
-        value: [ remote ]
+        value: remote
 
 engine:
   merge:
