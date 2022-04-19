@@ -58,6 +58,13 @@ accelerator:
       inputType: text
       dataType: string
       defaultValue: "dev-space"
+    - name: ingress-domain
+      label: Deployment environment
+      display: true
+      description: The TAP environment the application will be deployed in
+      inputType: text
+      dataType: string
+      defaultValue: "tap.example.com"
     - name: apiSpecLocation
       label: API specification location
       inputType: select
@@ -114,4 +121,4 @@ engine:
       - type: ReplaceText
         substitutions:
           - text: "../src/main/resources/openapi.yaml"
-            with: "'https://' + #artifactId + '-' + #namespace + '.cnr.emea.end2end.link'"
+            with: "'https://' + #artifactId + '-' + #namespace + '.cnr.' + #ingress-domain + '/v3/api-docs.yaml'"
