@@ -51,6 +51,31 @@ accelerator:
       inputType: text
       dataType: string
       defaultValue: "main"
+    - name: namespace
+      label: Deployment namespace
+      display: true
+      description: The Kubernetes namespace the application will be deployed in
+      inputType: text
+      dataType: string
+      defaultValue: "dev-space"
+    - name: apiSpecLocation
+      label: Spring Boot version
+      inputType: select
+      choices:
+      - value: local
+        text: Local path
+      - value: remote
+        text: Remote path
+        defaultValue: "local"
+        required: true
+      - name: apiSpecLocationUrlRemote
+        inputType: text
+        dataType: string
+        defaultValue: "'https://' + #artifactId + '-' + #namespace + '.cnr.emea.end2end.link'"
+        dependsOn:
+          name: apiSpecLocation
+          value: [ remote ]
+
 engine:
   merge:
   - exclude: [ '**/*.java', "accelerator-deployment.yaml"]
@@ -91,3 +116,17 @@ engine:
       substitutions:
         - text: tmf-product-catalog-management-api
           with: "#artifactId"
+  - include: [ "catalog-info.yaml" ]
+    condition: "#apiSpecLocation == 'remote'"
+    chain:
+      - type: ReplaceText
+        substitutions:
+          - text: "$text: ../src/main/resources/openapi.yaml"
+            with: "#apiSpecLocation"
+  - include: [ "catalog-info.yaml" ]
+    condition: "#apiSpecLocation == 'local'"
+    chain:
+      - type: ReplaceText
+        substitutions:
+          - text: "$text: ../src/main/resources/openapi.yaml"
+            with: "#apiSpecLocationUrlRemote"

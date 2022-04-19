@@ -2,6 +2,7 @@ apiVersion: carto.run/v1alpha1
 kind: Workload
 metadata:
   name: tmf-product-catalog-management-api
+  namespace: default
   labels:
     app.kubernetes.io/part-of: tmf-product-catalog-management-api
     apps.tanzu.vmware.com/workload-type: web
