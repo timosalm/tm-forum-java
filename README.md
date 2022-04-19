@@ -25,7 +25,7 @@ or
 tanzu accelerator create tmf-product-catalog-management-api-java --git-repository https://github.com/tsalm-pivotal/tm-forum-java.git --git-branch main
 ```
 ## Backstage
-To be able to read data from endpoints outside of the configured integrations, you now need to explicitly allow it by adding an entry to the TAP GUI gonfiguration in the backend.reading.allow list. 
+To be able to read data from endpoints outside of the configured integrations, you now need to explicitly allow it by adding an entry to the TAP GUI configuration in the backend.reading.allow list. 
 For example:
 ```
 tap_gui:
