@@ -24,3 +24,19 @@ or
 ```
 tanzu accelerator create tmf-product-catalog-management-api-java --git-repository https://github.com/tsalm-pivotal/tm-forum-java.git --git-branch main
 ```
+## Backstage
+To be able to read data from endpoints outside of the configured integrations, you now need to explicitly allow it by adding an entry to the TAP GUI gonfiguration in the backend.reading.allow list. 
+For example:
+```
+tap_gui:
+  app_config:
+    backend:
+      baseUrl: #@ "https://tap-gui.{}".format(data.values.ingress.domain)
+      cors:
+        origin: #@ "https://tap-gui.{}".format(data.values.ingress.domain)
+      reading:
+        allow:
+          - host: acc-server.accelerator-system.svc.cluster.local
+          - host: #@ data.values.ingress.domain
+```
+In our use-case this is necessary for the API plugin configuration via the running application. 
