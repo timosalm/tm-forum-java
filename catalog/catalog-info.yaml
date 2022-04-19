@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: tmf-product-catalog-management-api
+  name: product-catalog-management-api
   description: TMF Product Catalog Management API
   tags:
     - tmf620
