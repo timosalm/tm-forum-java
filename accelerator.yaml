@@ -66,16 +66,8 @@ accelerator:
         text: Local path
       - value: remote
         text: Remote path
-        defaultValue: "local"
-        required: true
-    - name: apiSpecLocationUrlRemote
-      inputType: text
-      dataType: string
-      defaultValue: "'https://' + #artifactId + '-' + #namespace + '.cnr.emea.end2end.link'"
-      dependsOn:
-        name: apiSpecLocation
-        value: remote
-
+      defaultValue: "local"
+      required: true
 engine:
   merge:
   - exclude: [ '**/*.java', "accelerator-deployment.yaml"]
@@ -121,12 +113,5 @@ engine:
     chain:
       - type: ReplaceText
         substitutions:
-          - text: "$text: ../src/main/resources/openapi.yaml"
-            with: "#apiSpecLocation"
-  - include: [ "catalog-info.yaml" ]
-    condition: "#apiSpecLocation == 'local'"
-    chain:
-      - type: ReplaceText
-        substitutions:
-          - text: "$text: ../src/main/resources/openapi.yaml"
-            with: "#apiSpecLocationUrlRemote"
+          - text: "../src/main/resources/openapi.yaml"
+            with: "'https://' + #artifactId + '-' + #namespace + '.cnr.emea.end2end.link'"
