@@ -68,13 +68,13 @@ accelerator:
         text: Remote path
         defaultValue: "local"
         required: true
-      - name: apiSpecLocationUrlRemote
-        inputType: text
-        dataType: string
-        defaultValue: "'https://' + #artifactId + '-' + #namespace + '.cnr.emea.end2end.link'"
-        dependsOn:
-          name: apiSpecLocation
-          value: [ remote ]
+    - name: apiSpecLocationUrlRemote
+      inputType: text
+      dataType: string
+      defaultValue: "'https://' + #artifactId + '-' + #namespace + '.cnr.emea.end2end.link'"
+      dependsOn:
+        name: apiSpecLocation
+        value: [ remote ]
 
 engine:
   merge:
