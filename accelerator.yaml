@@ -80,7 +80,7 @@ accelerator:
         value: remote
 engine:
   merge:
-  - exclude: [ '**/*.java', "accelerator-deployment.yaml"]
+  - exclude: [ '**/*.java', "accelerator-deployment.yaml", "update-accelerator.sh"]
   - include: [ "config/workload.yaml" ]
     chain:
     - type: ReplaceText
@@ -120,7 +120,7 @@ engine:
       substitutions:
         - text: tmf-product-catalog-management-api
           with: "#artifactId"
-  - include: [ "catalog-info.yaml" ]
+  - include: [ "catalog/catalog-info.yaml" ]
     condition: "#apiSpecLocation == 'remote'"
     chain:
       - type: ReplaceText
