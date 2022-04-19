@@ -24,4 +24,4 @@ spec:
   lifecycle: experimental
   owner: default-team
   definition:
-    text: https://product-catalog-management-api-java-dev-space.cnr.emea.end2end.link/v3/api-docs.yaml
+    $text: https://product-catalog-management-api-java-dev-space.cnr.emea.end2end.link/v3/api-docs.yaml
