@@ -58,13 +58,6 @@ accelerator:
       inputType: text
       dataType: string
       defaultValue: "dev-space"
-    - name: ingressDomain
-      label: Deployment environment
-      display: true
-      description: The TAP environment the application will be deployed in
-      inputType: text
-      dataType: string
-      defaultValue: "tap.example.com"
     - name: apiSpecLocation
       label: API specification location
       inputType: select
@@ -75,6 +68,16 @@ accelerator:
         text: Remote path
       defaultValue: "local"
       required: true
+    - name: ingressDomain
+      label: Deployment environment
+      display: true
+      description: The TAP environment the application will be deployed in
+      inputType: text
+      dataType: string
+      defaultValue: "tap.example.com"
+      dependsOn:
+        name: apiSpecLocation
+        value: remote
 engine:
   merge:
   - exclude: [ '**/*.java', "accelerator-deployment.yaml"]
@@ -88,6 +91,8 @@ engine:
         with: "#gitBranch"
       - text: tmf-product-catalog-management-api
         with: "#artifactId"
+      - text: default
+        with: "#namespace"
   - include: [ "**/*.java", "**/*.properties" ]
     chain:
     - type: ReplaceText
