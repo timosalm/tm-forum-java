@@ -65,3 +65,37 @@ stringData:
   password: <password>
 EOF
 ```
+
+```
+kubectl describe mongodbcommunity -n <namespace>
+```
+
+```
+cat << EOF | kubectl apply -n <namespace> -f -
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mongodb-binding-compatible
+type: Opaque
+stringData:
+  type: mongodb
+  provider: in-cluster
+  host: <hostname>
+  port: <port>
+  database: admin
+  username: admin
+  password: <password>
+EOF
+```
+
+```
+tanzu service claim create mongodb-binding-compatible \
+  --resource-name mongodb-binding-compatible \
+  --resource-kind Secret \
+  --resource-api-version v1 -n <namespace>
+```
+
+```
+tanzu service claim list -o wide -n <namespace>
+```

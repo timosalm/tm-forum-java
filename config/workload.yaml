@@ -15,8 +15,8 @@ spec:
       ref:
         branch: main
   serviceClaims:
-    - name: rmq
+    - name: mongodb
       ref:
-        apiVersion: mongodbcommunity.mongodb.com/v1
-        kind: MongoDBCommunity
-        name: mongodb
+        apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+        kind: ResourceClaim
+        name: mongodb-binding-compatible

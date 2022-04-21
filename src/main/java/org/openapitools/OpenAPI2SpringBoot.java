@@ -15,8 +15,9 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@EnableMongoRepositories
+@EnableMongoRepositories({"com.vodafone"})
 @SpringBootApplication
+@ComponentScan(basePackages = {"org.openapitools", "com.vodafone" , "org.openapitools.configuration"})
 public class OpenAPI2SpringBoot implements CommandLineRunner {
 
     @Override
