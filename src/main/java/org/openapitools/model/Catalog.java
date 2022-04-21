@@ -8,6 +8,8 @@ import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import nonapi.io.github.classgraph.json.Id;
 import org.openapitools.model.CategoryRef;
 import org.openapitools.model.RelatedParty;
 import org.openapitools.model.TimePeriod;
@@ -30,6 +32,7 @@ import javax.annotation.Generated;
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-04-11T11:10:26.067+02:00[Europe/Berlin]")
 public class Catalog   {
 
+  @Id
   @JsonProperty("id")
   private String id;
 

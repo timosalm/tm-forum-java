@@ -24,3 +24,44 @@ or
 ```
 tanzu accelerator create tmf-product-catalog-management-api-java --git-repository https://github.com/tsalm-pivotal/tm-forum-java.git --git-branch main
 ```
+
+## Install Mongo DB operator / instance
+```
+git clone https://github.com/mongodb/mongodb-kubernetes-operator.git
+```
+Follow instructions [here](https://github.com/mongodb/mongodb-kubernetes-operator/blob/master/docs/install-upgrade.md#operator-in-different-namespace-than-resources)
+
+```
+cat << EOF | kubectl apply -n <namespace> -f -
+---
+apiVersion: mongodbcommunity.mongodb.com/v1
+kind: MongoDBCommunity
+metadata:
+  name: mongodb
+spec:
+  members: 1
+  type: ReplicaSet
+  version: "4.2.7"
+  security:
+    authentication:
+      modes: ["SCRAM"]
+  users:
+    - name: admin
+      passwordSecretRef:
+        name: mongodb-admin-pw
+      roles:
+        - name: clusterAdmin
+          db: admin
+        - name: userAdminAnyDatabase
+          db: admin
+      scramCredentialsSecretName: mongodb-admin-scram
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mongodb-admin-pw
+type: Opaque
+stringData:
+  password: <password>
+EOF
+```

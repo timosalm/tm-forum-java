@@ -1,5 +1,7 @@
 package com.vodafone;
 
+import org.openapitools.model.Catalog;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +15,12 @@ import javax.annotation.Generated;
 public class CatalogApiController implements CatalogApi {
 
     private final NativeWebRequest request;
+    private final CrudRepository<Catalog, String> repository;
 
     @Autowired
-    public CatalogApiController(NativeWebRequest request) {
+    public CatalogApiController(NativeWebRequest request, CrudRepository<Catalog, String> repository) {
         this.request = request;
+        this.repository = repository;
     }
 
     @Override
@@ -24,4 +28,8 @@ public class CatalogApiController implements CatalogApi {
         return Optional.ofNullable(request);
     }
 
+    @Override
+    public Optional<CrudRepository<Catalog, String>> getRepository() {
+        return Optional.ofNullable(repository);
+    }
 }

@@ -5,33 +5,28 @@
  */
 package com.vodafone;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.openapitools.model.Catalog;
 import org.openapitools.model.CatalogCreate;
 import org.openapitools.model.CatalogUpdate;
 import org.openapitools.model.Error;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
-import javax.validation.constraints.*;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import javax.annotation.Generated;
+import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-04-11T11:10:26.067+02:00[Europe/Berlin]")
 @Validated
@@ -39,6 +34,9 @@ import javax.annotation.Generated;
 public interface CatalogApi {
 
     default Optional<NativeWebRequest> getRequest() {
+        return Optional.empty();
+    }
+    default Optional<CrudRepository<Catalog, String >> getRepository() {
         return Optional.empty();
     }
 
@@ -129,8 +127,11 @@ public interface CatalogApi {
     default ResponseEntity<Void> deleteCatalog(
         @Parameter(name = "id", description = "Identifier of the Catalog", required = true, schema = @Schema(description = "")) @PathVariable("id") String id
     ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
+        if (getRepository().isPresent()) {
+            getRepository().get().deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
 
@@ -175,7 +176,11 @@ public interface CatalogApi {
         @Parameter(name = "offset", description = "Requested index for start of resources to be provided in response", schema = @Schema(description = "")) @Valid @RequestParam(value = "offset", required = false) Integer offset,
         @Parameter(name = "limit", description = "Requested number of resources to be provided in response", schema = @Schema(description = "")) @Valid @RequestParam(value = "limit", required = false) Integer limit
     ) {
-        return ResponseEntity.ok(Collections.emptyList());
+        if (getRepository().isPresent()) {
+            Iterable<Catalog> catalogs = getRepository().get().findAll();
+            return ResponseEntity.ok(ApiUtil.toList(catalogs));
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
 

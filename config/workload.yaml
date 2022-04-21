@@ -14,3 +14,9 @@ spec:
       url: https://github.com/tsalm-pivotal/tm-forum-java.git
       ref:
         branch: main
+  serviceClaims:
+    - name: rmq
+      ref:
+        apiVersion: mongodbcommunity.mongodb.com/v1
+        kind: MongoDBCommunity
+        name: mongodb
