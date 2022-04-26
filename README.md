@@ -50,9 +50,7 @@ spec:
       passwordSecretRef:
         name: mongodb-admin-pw
       roles:
-        - name: clusterAdmin
-          db: admin
-        - name: userAdminAnyDatabase
+        - name: dbOwner
           db: admin
       scramCredentialsSecretName: mongodb-admin-scram
 ---

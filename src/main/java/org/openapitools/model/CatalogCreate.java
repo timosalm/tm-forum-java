@@ -30,6 +30,10 @@ import javax.annotation.Generated;
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-04-11T11:10:26.067+02:00[Europe/Berlin]")
 public class CatalogCreate   {
 
+  public Catalog toCatalog(String baseUri) {
+    return new Catalog(baseUri, catalogType, description, lastUpdate, lifecycleStatus, name, version, category, relatedParty, validFor, atBaseType, atSchemaLocation, atType);
+  }
+
   @JsonProperty("catalogType")
   private String catalogType;
 

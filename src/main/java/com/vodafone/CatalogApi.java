@@ -17,7 +17,6 @@ import org.openapitools.model.CatalogUpdate;
 import org.openapitools.model.Error;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +24,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 
 import javax.annotation.Generated;
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +32,9 @@ import java.util.Optional;
 @Validated
 @Tag(name = "catalog", description = "the catalog API")
 public interface CatalogApi {
+
+    static final String BASE_URI = "/catalog";
+
 
     default Optional<NativeWebRequest> getRequest() {
         return Optional.empty();
@@ -69,24 +72,19 @@ public interface CatalogApi {
     )
     @RequestMapping(
         method = RequestMethod.POST,
-        value = "/catalog",
+        value = BASE_URI,
         produces = { "application/json;charset=utf-8" },
         consumes = { "application/json;charset=utf-8" }
     )
     default ResponseEntity<Catalog> createCatalog(
         @Parameter(name = "catalog", description = "The Catalog to be created", required = true, schema = @Schema(description = "")) @Valid @RequestBody CatalogCreate catalog
     ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json;charset=utf-8"))) {
-                    String exampleString = "{ \"catalogType\" : \"catalogType\", \"lifecycleStatus\" : \"lifecycleStatus\", \"validFor\" : { \"startDateTime\" : \"1985-04-12T23:20:50.52Z\", \"endDateTime\" : \"1985-04-12T23:20:50.52Z\" }, \"@type\" : \"@type\", \"description\" : \"description\", \"relatedParty\" : [ { \"@referredType\" : \"@referredType\", \"role\" : \"role\", \"@baseType\" : \"@baseType\", \"@type\" : \"@type\", \"name\" : \"name\", \"id\" : \"id\", \"href\" : \"https://openapi-generator.tech\", \"@schemaLocation\" : \"https://openapi-generator.tech\" }, { \"@referredType\" : \"@referredType\", \"role\" : \"role\", \"@baseType\" : \"@baseType\", \"@type\" : \"@type\", \"name\" : \"name\", \"id\" : \"id\", \"href\" : \"https://openapi-generator.tech\", \"@schemaLocation\" : \"https://openapi-generator.tech\" } ], \"version\" : \"version\", \"@baseType\" : \"@baseType\", \"lastUpdate\" : \"2000-01-23T04:56:07.000+00:00\", \"name\" : \"name\", \"id\" : \"id\", \"href\" : \"href\", \"category\" : [ { \"@referredType\" : \"@referredType\", \"@baseType\" : \"@baseType\", \"@type\" : \"@type\", \"name\" : \"name\", \"id\" : \"id\", \"href\" : \"https://openapi-generator.tech\", \"@schemaLocation\" : \"https://openapi-generator.tech\", \"version\" : \"version\" }, { \"@referredType\" : \"@referredType\", \"@baseType\" : \"@baseType\", \"@type\" : \"@type\", \"name\" : \"name\", \"id\" : \"id\", \"href\" : \"https://openapi-generator.tech\", \"@schemaLocation\" : \"https://openapi-generator.tech\", \"version\" : \"version\" } ], \"@schemaLocation\" : \"https://openapi-generator.tech\" }";
-                    ApiUtil.setExampleResponse(request, "application/json;charset=utf-8", exampleString);
-                    break;
-                }
-            }
-        });
+        if (getRepository().isPresent()) {
+            Catalog savedCatalog = getRepository().get().save(catalog.toCatalog(BASE_URI));
+            final URI sensorUri = URI.create(savedCatalog.getHref());
+            return ResponseEntity.created(sensorUri).body(savedCatalog);
+        }
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
     }
 
 
@@ -222,17 +220,18 @@ public interface CatalogApi {
     )
     default ResponseEntity<Catalog> patchCatalog(
         @Parameter(name = "id", description = "Identifier of the Catalog", required = true, schema = @Schema(description = "")) @PathVariable("id") String id,
-        @Parameter(name = "catalog", description = "The Catalog to be updated", required = true, schema = @Schema(description = "")) @Valid @RequestBody CatalogUpdate catalog
+        @Parameter(name = "catalog", description = "The Catalog to be updated", required = true, schema = @Schema(description = "")) @Valid @RequestBody CatalogUpdate catalogUdate
     ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json;charset=utf-8"))) {
-                    String exampleString = "{ \"catalogType\" : \"catalogType\", \"lifecycleStatus\" : \"lifecycleStatus\", \"validFor\" : { \"startDateTime\" : \"1985-04-12T23:20:50.52Z\", \"endDateTime\" : \"1985-04-12T23:20:50.52Z\" }, \"@type\" : \"@type\", \"description\" : \"description\", \"relatedParty\" : [ { \"@referredType\" : \"@referredType\", \"role\" : \"role\", \"@baseType\" : \"@baseType\", \"@type\" : \"@type\", \"name\" : \"name\", \"id\" : \"id\", \"href\" : \"https://openapi-generator.tech\", \"@schemaLocation\" : \"https://openapi-generator.tech\" }, { \"@referredType\" : \"@referredType\", \"role\" : \"role\", \"@baseType\" : \"@baseType\", \"@type\" : \"@type\", \"name\" : \"name\", \"id\" : \"id\", \"href\" : \"https://openapi-generator.tech\", \"@schemaLocation\" : \"https://openapi-generator.tech\" } ], \"version\" : \"version\", \"@baseType\" : \"@baseType\", \"lastUpdate\" : \"2000-01-23T04:56:07.000+00:00\", \"name\" : \"name\", \"id\" : \"id\", \"href\" : \"href\", \"category\" : [ { \"@referredType\" : \"@referredType\", \"@baseType\" : \"@baseType\", \"@type\" : \"@type\", \"name\" : \"name\", \"id\" : \"id\", \"href\" : \"https://openapi-generator.tech\", \"@schemaLocation\" : \"https://openapi-generator.tech\", \"version\" : \"version\" }, { \"@referredType\" : \"@referredType\", \"@baseType\" : \"@baseType\", \"@type\" : \"@type\", \"name\" : \"name\", \"id\" : \"id\", \"href\" : \"https://openapi-generator.tech\", \"@schemaLocation\" : \"https://openapi-generator.tech\", \"version\" : \"version\" } ], \"@schemaLocation\" : \"https://openapi-generator.tech\" }";
-                    ApiUtil.setExampleResponse(request, "application/json;charset=utf-8", exampleString);
-                    break;
-                }
+        if (getRepository().isPresent()) {
+            Optional<Catalog> possibleCatalog = getRepository().get().findById(id);
+            if (possibleCatalog.isPresent()) {
+                Catalog catalog = possibleCatalog.get();
+                catalog.update(catalogUdate);
+                getRepository().get().save(catalog);
+                return ResponseEntity.ok(catalog);
             }
-        });
+            return ResponseEntity.notFound().build();
+        }
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
@@ -277,15 +276,13 @@ public interface CatalogApi {
         @Parameter(name = "id", description = "Identifier of the Catalog", required = true, schema = @Schema(description = "")) @PathVariable("id") String id,
         @Parameter(name = "fields", description = "Comma-separated properties to provide in response", schema = @Schema(description = "")) @Valid @RequestParam(value = "fields", required = false) String fields
     ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json;charset=utf-8"))) {
-                    String exampleString = "{ \"catalogType\" : \"catalogType\", \"lifecycleStatus\" : \"lifecycleStatus\", \"validFor\" : { \"startDateTime\" : \"1985-04-12T23:20:50.52Z\", \"endDateTime\" : \"1985-04-12T23:20:50.52Z\" }, \"@type\" : \"@type\", \"description\" : \"description\", \"relatedParty\" : [ { \"@referredType\" : \"@referredType\", \"role\" : \"role\", \"@baseType\" : \"@baseType\", \"@type\" : \"@type\", \"name\" : \"name\", \"id\" : \"id\", \"href\" : \"https://openapi-generator.tech\", \"@schemaLocation\" : \"https://openapi-generator.tech\" }, { \"@referredType\" : \"@referredType\", \"role\" : \"role\", \"@baseType\" : \"@baseType\", \"@type\" : \"@type\", \"name\" : \"name\", \"id\" : \"id\", \"href\" : \"https://openapi-generator.tech\", \"@schemaLocation\" : \"https://openapi-generator.tech\" } ], \"version\" : \"version\", \"@baseType\" : \"@baseType\", \"lastUpdate\" : \"2000-01-23T04:56:07.000+00:00\", \"name\" : \"name\", \"id\" : \"id\", \"href\" : \"href\", \"category\" : [ { \"@referredType\" : \"@referredType\", \"@baseType\" : \"@baseType\", \"@type\" : \"@type\", \"name\" : \"name\", \"id\" : \"id\", \"href\" : \"https://openapi-generator.tech\", \"@schemaLocation\" : \"https://openapi-generator.tech\", \"version\" : \"version\" }, { \"@referredType\" : \"@referredType\", \"@baseType\" : \"@baseType\", \"@type\" : \"@type\", \"name\" : \"name\", \"id\" : \"id\", \"href\" : \"https://openapi-generator.tech\", \"@schemaLocation\" : \"https://openapi-generator.tech\", \"version\" : \"version\" } ], \"@schemaLocation\" : \"https://openapi-generator.tech\" }";
-                    ApiUtil.setExampleResponse(request, "application/json;charset=utf-8", exampleString);
-                    break;
-                }
+        if (getRepository().isPresent()) {
+            Optional<Catalog> possibleCatalog = getRepository().get().findById(id);
+            if (possibleCatalog.isPresent()) {
+                return ResponseEntity.ok(possibleCatalog.get());
             }
-        });
+            return ResponseEntity.notFound().build();
+        }
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
