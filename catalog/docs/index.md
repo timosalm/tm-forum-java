@@ -1,3 +1,5 @@
-# Product Catalog Management API
+# TMF APIs
 
-Provides a standardized solution for rapidly adding partners’ products to an existing Catalog. It brings the capability for Service Providers to directly feed partners systems with the technical description of the products they propose to them. 
+The increasingly complex multi-partner digital services value chain raises new challenges in terms of ensuring time-to-market, seamless management, cost-effectiveness and revenue sharing.
+
+In order to meet these challenges, TM Forum members including the world’s largest service providers and suppliers, have been working to develop APIs that enable the open digital ecosystem and provide critical management functionality to digital services.
