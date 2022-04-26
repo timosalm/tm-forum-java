@@ -1,3 +1,4 @@
+/*
 package com.vodafone;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -10,3 +11,4 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableJpaRepositories({"com.vodafone"})
 public class PostgresRepositoryConfiguration {
 }
+*/
