@@ -37,6 +37,16 @@ accelerator:
         text: 3.0.0 (M2)
       defaultValue: "2.6.6"
       required: true
+    - name: database
+      label: Database
+      inputType: select
+      choices:
+        - value: MongoDB
+          text: mongo
+        - value: PostgreSQL
+          text: postgres
+      defaultValue: "postgres"
+      required: true
     - name: gitUrl
       label: Git repository URL
       display: true
@@ -80,7 +90,7 @@ accelerator:
         value: remote
 engine:
   merge:
-  - exclude: [ '**/*.java', "accelerator-deployment.yaml", "update-accelerator.sh"]
+  - exclude: [ "accelerator-deployment.yaml", "update-accelerator.sh", "catalog/components/database/*.yaml"]
   - include: [ "config/workload.yaml" ]
     chain:
     - type: ReplaceText
@@ -93,6 +103,15 @@ engine:
         with: "#artifactId"
       - text: default
         with: "#namespace"
+    - type: ReplaceText
+      condition: "#database == 'postgres'"
+      substitutions:
+      - text: "apiVersion: services.apps.tanzu.vmware.com/v1alpha1"
+        with: "apiVersion: sql.tanzu.vmware.com/v1"
+      - text: "kind: ResourceClaim"
+        with: "kind: Postgres"
+      - text: "name: mongodb-binding-compatible"
+        with: "name: postgres-1"
   - include: [ "**/*.java", "**/*.properties" ]
     chain:
     - type: ReplaceText
@@ -102,6 +121,10 @@ engine:
     - type: RewritePath
       regex: src/main/java/com/vodafone/(.*)
       rewriteTo: "'src/main/java/' + #pkgName.replace('.', '/') + '/' + #g1"
+    - type: ReplaceText
+      substitutions:
+        - text: "database=mongo"
+          with: "database=' + #database"
   - include: [ "pom.xml" ]
     chain:
       - type: ReplaceText
@@ -120,10 +143,18 @@ engine:
       substitutions:
         - text: tmf-product-catalog-management-api
           with: "#artifactId"
-  - include: [ "catalog/catalog-info.yaml" ]
-    condition: "#apiSpecLocation == 'remote'"
+  - include: [ "catalog/*.yaml" ]
     chain:
       - type: ReplaceText
+        condition: "#apiSpecLocation == 'remote'"
         substitutions:
-          - text: "../src/main/resources/openapi.yaml"
+          - text: "../../../src/main/resources/openapi.yaml"
             with: "'https://' + #artifactId + '-' + #namespace + '.cnr.' + #ingressDomain + '/v3/api-docs.yaml'"
+      - type: ReplaceText
+        substitutions:
+          - text: "component-mongo.yaml"
+            with: "'component-' + #database + '.yaml'"
+  - include: [ "catalog/components/database/component-postgres.yaml" ]
+    condition: "#database == 'postgres'"
+  - include: [ "catalog/components/database/component-mongo.yaml" ]
+    condition: "#database == 'mongo'"

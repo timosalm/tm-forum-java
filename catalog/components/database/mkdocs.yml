@@ -1,0 +1,7 @@
+site_name: 'tmf-product-catalog-management-api-db'
+
+nav:
+  - Home: index.md
+
+plugins:
+  - techdocs-core

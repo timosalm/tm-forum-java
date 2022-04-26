@@ -15,7 +15,7 @@ spec:
       ref:
         branch: main
   serviceClaims:
-    - name: mongodb
+    - name: db
       ref:
         apiVersion: services.apps.tanzu.vmware.com/v1alpha1
         kind: ResourceClaim

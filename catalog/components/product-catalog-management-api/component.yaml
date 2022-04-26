@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: tmf-product-catalog-management-api
+  description: TMF Product Catalog Management API
+  tags:
+    - tmf620
+  annotations:
+    'backstage.io/kubernetes-label-selector': 'app.kubernetes.io/part-of=tmf-product-catalog-management-api'
+spec:
+  type: service
+  lifecycle: experimental
+  owner: default-team
+  providesApis:
+    - tmf-product-catalog-management-api
