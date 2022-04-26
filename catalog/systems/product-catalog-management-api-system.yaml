@@ -1,8 +1,8 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name:  tmf-product-catalog-management-api
-  description: TMF Product Catalog Management API
+  name:  tmf-apis
+  description: TMF APIs
   annotations:
     'backstage.io/techdocs-ref': dir:.
 spec:

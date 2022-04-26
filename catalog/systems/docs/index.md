@@ -1,3 +1,3 @@
-# TMF Product Catalog Management API System
+# TMF APIs System
 
-The TMF Product Catalog Management API system is composed of four parts: `tmf-product-catalog-management-api`, and `tmf-product-catalog-management-api-db`.
+The TMF APIs System is currently composed of the Product Catalog Management API and its two parts: `tmf-product-catalog-management-api`, and `tmf-product-catalog-management-api-db`.
