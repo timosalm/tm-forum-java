@@ -7,5 +7,6 @@ spec:
   type: openapi
   lifecycle: experimental
   owner: default-team
+  system: tmf-product-catalog-management-api
   definition:
     $text: ../../../src/main/resources/openapi.yaml

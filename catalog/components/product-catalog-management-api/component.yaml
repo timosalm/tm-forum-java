@@ -11,5 +11,6 @@ spec:
   type: service
   lifecycle: experimental
   owner: default-team
+  system: tmf-product-catalog-management-api
   providesApis:
     - tmf-product-catalog-management-api
