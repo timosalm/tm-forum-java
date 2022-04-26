@@ -7,7 +7,7 @@ metadata:
     'backstage.io/techdocs-ref': dir:.
 spec:
   targets:
-    - ./components/product-catalog-management-api/component.yaml
-    - ./components/product-catalog-management-api/api.yaml
+    - ./systems/tmf-apis-system.yaml
     - ./components/database/component-mongo.yaml
-    - ./systems/product-catalog-management-api-system.yaml
+    - ./components/product-catalog-management-api/api.yaml
+    - ./components/product-catalog-management-api/component.yaml
