@@ -13,6 +13,6 @@ spec:
   owner: default-team
   system: tmf-apis
   dependsOn:
-    - tmf-product-catalog-management-api-db
+    - Component:tmf-product-catalog-management-api-db
   providesApis:
     - tmf-product-catalog-management-api
