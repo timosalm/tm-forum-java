@@ -10,5 +10,4 @@ spec:
     - ./components/product-catalog-management-api/component.yaml
     - ./components/product-catalog-management-api/api.yaml
     - ./components/database/component-mongo.yaml
-    - ./components/database/component-mongo.yaml
     - ./systems/product-catalog-management-api-system.yaml
