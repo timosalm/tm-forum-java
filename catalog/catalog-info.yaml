@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Location
 metadata:
-  name: tmf-apis
+  name: tmf-apis-location
   description: TMF APIs
   annotations:
     'backstage.io/techdocs-ref': dir:.

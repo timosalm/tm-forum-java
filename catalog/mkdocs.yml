@@ -1,4 +1,4 @@
-site_name: 'tmf-apis'
+site_name: 'tmf-apis-location'
 
 nav:
   - Home: index.md

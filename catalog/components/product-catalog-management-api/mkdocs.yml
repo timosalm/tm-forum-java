@@ -1,4 +1,4 @@
-site_name: 'tmf-product-catalog-management-api'
+site_name: 'tmf-product-catalog-management-api-service'
 
 nav:
   - Home: index.md
