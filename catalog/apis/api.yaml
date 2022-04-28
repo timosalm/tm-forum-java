@@ -9,4 +9,4 @@ spec:
   owner: default-team
   system: tmf-apis
   definition:
-    $text: ../../../src/main/resources/openapi.yaml
+    $text: ../../src/main/resources/openapi.yaml
