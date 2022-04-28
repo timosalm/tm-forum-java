@@ -5,5 +5,9 @@ metadata:
   description: TMF APIs
   annotations:
     'backstage.io/techdocs-ref': dir:.
+  links:
+    - url: https://www.tmforum.org
+      title: TM Forum
+      icon: https://www.tmforum.org/wp-content/themes/pro-child/framework/img/logo/TMForum_logo_2021.svg
 spec:
   owner: default-team
