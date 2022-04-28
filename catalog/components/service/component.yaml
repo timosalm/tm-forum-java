@@ -8,6 +8,9 @@ metadata:
   annotations:
     'backstage.io/kubernetes-label-selector': 'app.kubernetes.io/part-of=tmf-product-catalog-management-api'
     'backstage.io/techdocs-ref': dir:.
+  links:
+    - url: https://www.tmforum.org
+      title: TM Forum
 spec:
   type: service
   lifecycle: experimental

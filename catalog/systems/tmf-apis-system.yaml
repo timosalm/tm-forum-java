@@ -5,8 +5,5 @@ metadata:
   description: TMF APIs
   annotations:
     'backstage.io/techdocs-ref': dir:.
-  links:
-    - url: https://www.tmforum.org
-      title: TM Forum
 spec:
   owner: default-team
