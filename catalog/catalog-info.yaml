@@ -9,5 +9,5 @@ spec:
   targets:
     - ./systems/tmf-apis-system.yaml
     - ./components/database/component-mongo.yaml
-    - ./components/product-catalog-management-api/api.yaml
-    - ./components/product-catalog-management-api/component.yaml
+    - ./apis/api.yaml
+    - ./components/service/component.yaml
