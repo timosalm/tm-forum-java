@@ -97,3 +97,25 @@ tanzu service claim create mongodb-binding-compatible \
 ```
 tanzu service claim list -o wide -n <namespace>
 ```
+
+### Generate TechDocs
+https://docs.vmware.com/en/Tanzu-Application-Platform/1.1/tap/GUID-tap-gui-techdocs-usage.html
+```
+cd catalog
+
+export AWS_ACCESS_KEY_ID=AWS-ACCESS-KEY-ID
+export AWS_SECRET_ACCESS_KEY=AWS-SECRET-ACCESS-KEY
+export AWS_REGION=AWS-REGION
+
+generate-and-publish-docs () {
+ local kind=$(yq '.kind' < $1)
+ local name=$(yq '.metadata.name' < $1)
+ local target_path=$(echo "${1%/*}/")
+ npx @techdocs/cli generate --source-dir $target_path --output-dir ./site
+ npx @techdocs/cli publish --publisher-type awsS3 --storage-name tap-tech-docs --entity default/${kind}/${name} --directory ./site
+}
+generate-and-publish-docs ./catalog-info.yaml
+for target in $(yq '.spec.targets[]' < ./catalog-info.yaml); do
+  generate-and-publish-docs $target
+done
+```

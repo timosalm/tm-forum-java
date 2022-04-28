@@ -148,7 +148,7 @@ engine:
       - type: ReplaceText
         condition: "#apiSpecLocation == 'remote'"
         substitutions:
-          - text: "../../../src/main/resources/openapi.yaml"
+          - text: "../../src/main/resources/openapi.yaml"
             with: "'https://' + #artifactId + '-' + #namespace + '.cnr.' + #ingressDomain + '/v3/api-docs.yaml'"
       - type: ReplaceText
         substitutions:

@@ -35,3 +35,6 @@ build/
 
 .openapi-generator-ignore
 .openapi-generator/
+
+## TechDocs ##
+catalog/site/
