@@ -3,10 +3,14 @@ kind: API
 metadata:
   name: tmf-product-catalog-management-api
   description: API for Product Catalog Management
+  tags:
+    - tmf620
+  annotations:
+    'backstage.io/techdocs-ref': dir:.
 spec:
   type: openapi
   lifecycle: experimental
   owner: default-team
-  system: tmf-apis
+  system: tmf-apis-system
   definition:
     $text: ../../src/main/resources/openapi.yaml

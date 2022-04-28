@@ -13,4 +13,4 @@ spec:
   type: service
   lifecycle: experimental
   owner: default-team
-  system: tmf-apis
+  system: tmf-apis-system
