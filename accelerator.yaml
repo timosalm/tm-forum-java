@@ -99,7 +99,7 @@ engine:
         with: "#gitUrl"
       - text: main
         with: "#gitBranch"
-      - text: tmf-product-catalog-management-api
+      - text: tmf-product-catalog-management-api-java
         with: "#artifactId"
       - text: default
         with: "#namespace"
@@ -148,10 +148,6 @@ engine:
         substitutions:
           - text: "component-mongo.yaml"
             with: "'component-' + #database + '.yaml'"
-      - type: ReplaceText
-        substitutions:
-          - text: tmf-product-catalog-management-api
-            with: "#artifactId"
   - include: [ "catalog/components/database/component-postgres.yaml" ]
     condition: "#database == 'postgres'"
   - include: [ "catalog/components/database/component-mongo.yaml" ]

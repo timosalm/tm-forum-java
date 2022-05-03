@@ -6,7 +6,7 @@ metadata:
   tags:
     - tmf620
   annotations:
-    'backstage.io/kubernetes-label-selector': 'app.kubernetes.io/part-of=tmf-product-catalog-management-api'
+    'backstage.io/kubernetes-label-selector': 'app.kubernetes.io/part-of=tmf-product-catalog-management-api-service'
     'backstage.io/techdocs-ref': dir:.
   links:
     - url: https://www.tmforum.org

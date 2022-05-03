@@ -1,10 +1,10 @@
 apiVersion: carto.run/v1alpha1
 kind: Workload
 metadata:
-  name: tmf-product-catalog-management-api
+  name: tmf-product-catalog-management-api-java
   namespace: default
   labels:
-    app.kubernetes.io/part-of: tmf-product-catalog-management-api
+    app.kubernetes.io/part-of: tmf-product-catalog-management-api-service
     apps.tanzu.vmware.com/workload-type: web
     apps.tanzu.vmware.com/has-tests: true
     vodafone.com/check-api-conformance: "true"
