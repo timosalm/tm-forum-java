@@ -106,5 +106,5 @@ engine:
     - type: ReplaceText
       condition: "#database == 'postgres'"
       substitutions:
-      - text: "apiVersion: services.apps.tanzu.vmware.com/v1alpha1"
-        with: "apiVersion: sql.tanzu.vmware.com/v1"
+      - text: "'apiVersion: services.apps.tanzu.vmware.com/v1alpha1'"
+        with: "'apiVersion: sql.tanzu.vmware.com/v1'"
