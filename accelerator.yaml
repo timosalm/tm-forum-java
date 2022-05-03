@@ -91,6 +91,52 @@ accelerator:
 engine:
   merge:
   - exclude: [ "accelerator-deployment.yaml", "update-accelerator.sh", "catalog/components/database/*.yaml"]
+  - include: [ "config/workload.yaml" ]
+    chain:
+    - type: ReplaceText
+      substitutions:
+      - text: https://github.com/tsalm-pivotal/tm-forum-java.git
+        with: "#gitUrl"
+      - text: main
+        with: "#gitBranch"
+      - text: tmf-product-catalog-management-api
+        with: "#artifactId"
+      - text: default
+        with: "#namespace"
+    - type: ReplaceText
+      condition: "#database == 'postgres'"
+      substitutions:
+      - text: "apiVersion: services.apps.tanzu.vmware.com/v1alpha1"
+        with: "apiVersion: sql.tanzu.vmware.com/v1"
+      - text: "kind: ResourceClaim"
+        with: "kind: Postgres"
+      - text: "name: mongodb-binding-compatible"
+        with: "name: postgres-1"
+  - include: [ "**/*.java", "**/*.properties" ]
+    chain:
+    - type: ReplaceText
+      regex:
+        pattern: com.vodafone
+        with: "#pkgName"
+    - type: RewritePath
+      regex: src/main/java/com/vodafone/(.*)
+      rewriteTo: "'src/main/java/' + #pkgName.replace('.', '/') + '/' + #g1"
+    - type: ReplaceText
+      substitutions:
+        - text: "database=mongo"
+          with: "database=' + #database"
+  - include: [ "pom.xml" ]
+    chain:
+      - type: ReplaceText
+        substitutions:
+        - text: "<groupId>com.vodafone</groupId>"
+          with: "'<groupId>' + #pkgName + '</groupId>'"
+        - text: tmf-product-catalog-management-api
+          with: "#artifactId"
+        - text: "<java.version>1.8</java.version>"
+          with: "'<java.version>' + #javaVersion + '</java.version>'"
+        - text: "<version>2.6.2</version>"
+          with: "'<version>' + #springBootVersion + '</version>'"
   - include: [ "catalog/*.yaml" ]
     chain:
       - type: ReplaceText
@@ -102,6 +148,10 @@ engine:
         substitutions:
           - text: "component-mongo.yaml"
             with: "'component-' + #database + '.yaml'"
+      - type: ReplaceText
+          substitutions:
+              - text: tmf-product-catalog-management-api
+                with: "#artifactId"
   - include: [ "catalog/components/database/component-postgres.yaml" ]
     condition: "#database == 'postgres'"
   - include: [ "catalog/components/database/component-mongo.yaml" ]
