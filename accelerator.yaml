@@ -91,27 +91,6 @@ accelerator:
 engine:
   merge:
   - exclude: [ "accelerator-deployment.yaml", "update-accelerator.sh", "catalog/components/database/*.yaml"]
-  - include: [ "config/workload.yaml" ]
-    chain:
-    - type: ReplaceText
-      substitutions:
-      - text: https://github.com/tsalm-pivotal/tm-forum-java.git
-        with: "#gitUrl"
-      - text: main
-        with: "#gitBranch"
-      - text: tmf-product-catalog-management-api
-        with: "#artifactId"
-      - text: default
-        with: "#namespace"
-    - type: ReplaceText
-      condition: "#database == 'postgres'"
-      substitutions:
-      - text: "apiVersion: services.apps.tanzu.vmware.com/v1alpha1"
-        with: "apiVersion: sql.tanzu.vmware.com/v1"
-      - text: "kind: ResourceClaim"
-        with: "kind: Postgres"
-      - text: "name: mongodb-binding-compatible"
-        with: "name: postgres-1"
   - include: [ "**/*.java", "**/*.properties" ]
     chain:
     - type: ReplaceText
