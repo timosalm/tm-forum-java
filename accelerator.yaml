@@ -103,11 +103,3 @@ engine:
         with: "#artifactId"
       - text: default
         with: "#namespace"
-    - type: ReplaceText
-      substitutions:
-      - text: "apiVersion: services.apps.tanzu.vmware.com/v1alpha1"
-        with: "apiVersion: sql.tanzu.vmware.com/v1"
-      - text: "kind: ResourceClaim"
-        with: "kind: Postgres"
-      - text: "name: mongodb-binding-compatible"
-        with: "name: postgres-1"
