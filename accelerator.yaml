@@ -91,19 +91,27 @@ accelerator:
 engine:
   merge:
   - exclude: [ "accelerator-deployment.yaml", "update-accelerator.sh", "catalog/components/database/*.yaml"]
-  - include: [ "**/*.java", "**/*.properties" ]
+  - include: [ "config/workload.yaml" ]
     chain:
     - type: ReplaceText
-      regex:
-        pattern: com.vodafone
-        with: "#pkgName"
-    - type: RewritePath
-      regex: src/main/java/com/vodafone/(.*)
-      rewriteTo: "'src/main/java/' + #pkgName.replace('.', '/') + '/' + #g1"
-    - type: ReplaceText
       substitutions:
-        - text: "database=mongo"
-          with: "database=' + #database"
+      - text: https://github.com/tsalm-pivotal/tm-forum-java.git
+        with: "#gitUrl"
+      - text: main
+        with: "#gitBranch"
+      - text: tmf-product-catalog-management-api
+        with: "#artifactId"
+      - text: default
+        with: "#namespace"
+    - type: ReplaceText
+      condition: "#database == 'postgres'"
+      substitutions:
+      - text: "apiVersion: services.apps.tanzu.vmware.com/v1alpha1"
+        with: "apiVersion: sql.tanzu.vmware.com/v1"
+      - text: "kind: ResourceClaim"
+        with: "kind: Postgres"
+      - text: "name: mongodb-binding-compatible"
+        with: "name: postgres-1"
   - include: [ "pom.xml" ]
     chain:
       - type: ReplaceText
