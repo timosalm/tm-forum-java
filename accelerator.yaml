@@ -106,8 +106,6 @@ engine:
     - type: ReplaceText
       condition: "#database == 'postgres'"
       substitutions:
-      - text: "services.apps.tanzu.vmware.com/v1alpha1"
-        with: "sql.tanzu.vmware.com/v1"
       - text: "kind: ResourceClaim"
         with: "kind: Postgres"
       - text: "name: mongodb-binding-compatible"
