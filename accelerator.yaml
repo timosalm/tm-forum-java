@@ -125,15 +125,3 @@ engine:
       substitutions:
         - text: "database=mongo"
           with: "database=' + #database"
-  - include: [ "pom.xml" ]
-    chain:
-      - type: ReplaceText
-        substitutions:
-        - text: "<groupId>com.vodafone</groupId>"
-          with: "'<groupId>' + #pkgName + '</groupId>'"
-        - text: tmf-product-catalog-management-api
-          with: "#artifactId"
-        - text: "<java.version>1.8</java.version>"
-          with: "'<java.version>' + #javaVersion + '</java.version>'"
-        - text: "<version>2.6.2</version>"
-          with: "'<version>' + #springBootVersion + '</version>'"
