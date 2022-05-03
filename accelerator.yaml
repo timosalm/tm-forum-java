@@ -41,10 +41,10 @@ accelerator:
       label: Database
       inputType: select
       choices:
-        - value: MongoDB
-          text: mongo
-        - value: PostgreSQL
-          text: postgres
+        - text: MongoDB
+          value: mongo
+        - text: PostgreSQL
+          value: postgres
       defaultValue: "postgres"
       required: true
     - name: gitUrl
