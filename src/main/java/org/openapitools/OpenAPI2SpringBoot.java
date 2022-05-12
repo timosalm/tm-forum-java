@@ -1,6 +1,9 @@
 package org.openapitools;
 
 import com.fasterxml.jackson.databind.Module;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 import org.openapitools.jackson.nullable.JsonNullableModule;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.ExitCodeGenerator;
@@ -15,7 +18,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"org.openapitools", "com.vodafone" , "org.openapitools.configuration"})
+@ComponentScan(basePackages = {"org.openapitools", "com.vodafone", "org.openapitools.configuration"})
 public class OpenAPI2SpringBoot implements CommandLineRunner {
 
     @Override
@@ -66,4 +69,20 @@ public class OpenAPI2SpringBoot implements CommandLineRunner {
     public HttpTraceRepository httpTraceRepository() {
         return new InMemoryHttpTraceRepository();
     }
+
+    @Bean
+    public OpenAPI springShopOpenAPI() {
+        return new OpenAPI()
+                .info(new Info().title("TMF Product Catalog Management API")
+                        .description("## TMF API Reference: TMF620 - Product Catalog Management\n\n### Release" +
+                                " : 20.5 - March 2021\n\nProduct Catalog API is one of Catalog Management API" +
+                                " Family. Product Catalog API goal is to provide a catalog of products. \n\n###" +
+                                " Operations\nProduct Catalog API performs the following operations on the resources" +
+                                " :\n- Retrieve an entity or a collection of entities depending on filter criteria\n" +
+                                "    - Partial update of an entity (including updating rules)\n- Create an entity (including" +
+                                " default values and creation rules)\n- Delete an entity\n- Manage notification" +
+                                " of events")
+                        .version("4.1.0"));
+    }
 }
+
