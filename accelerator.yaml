@@ -143,13 +143,13 @@ engine:
         substitutions:
           - text: "component-mongo.yaml"
             with: "'component-' + #database + '.yaml'"
-    - include: [ "catalog/apis/api.yaml" ]
-      chain:
-        - type: ReplaceText
-          condition: "#apiSpecLocation == 'remote'"
-          substitutions:
-            - text: "../../src/main/resources/openapi.yaml"
-              with: "'https://' + #artifactId + '-' + #namespace + '.cnr.' + #ingressDomain + '/v3/api-docs.yaml'"
+  - include: [ "catalog/apis/api.yaml" ]
+    chain:
+      - type: ReplaceText
+        condition: "#apiSpecLocation == 'remote'"
+        substitutions:
+          - text: "../../src/main/resources/openapi.yaml"
+            with: "'https://' + #artifactId + '-' + #namespace + '.cnr.' + #ingressDomain + '/v3/api-docs.yaml'"
   - include: [ "catalog/components/database/component-postgres.yaml" ]
     condition: "#database == 'postgres'"
   - include: [ "catalog/components/database/component-mongo.yaml" ]
