@@ -53,6 +53,23 @@ public class Catalog {
         this.atType = atType;
     }
 
+    public Catalog(String id, String baseUri, String catalogType, String description, OffsetDateTime lastUpdate, String lifecycleStatus, String name, String version, List<CategoryRef> category, List<RelatedParty> relatedParty, TimePeriod validFor, String atBaseType, URI atSchemaLocation, String atType) {
+        this.id = id;
+        this.href = String.format("%s/%s", baseUri, id);
+        this.catalogType = catalogType;
+        this.description = description;
+        this.lastUpdate = lastUpdate;
+        this.lifecycleStatus = lifecycleStatus;
+        this.name = name;
+        this.version = version;
+        this.category = category;
+        this.relatedParty = relatedParty;
+        this.validFor = validFor;
+        this.atBaseType = atBaseType;
+        this.atSchemaLocation = atSchemaLocation;
+        this.atType = atType;
+    }
+
     public void update(CatalogUpdate catalogUdate) {
         this.catalogType = Optional.ofNullable(catalogUdate.getCatalogType()).orElse(catalogType);
         this.description = Optional.ofNullable(catalogUdate.getDescription()).orElse(description);

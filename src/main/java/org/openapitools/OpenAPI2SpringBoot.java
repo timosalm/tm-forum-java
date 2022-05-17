@@ -1,10 +1,16 @@
 package org.openapitools;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.Module;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import org.openapitools.jackson.nullable.JsonNullableModule;
+import org.openapitools.model.Catalog;
+import org.openapitools.model.CategoryRef;
+import org.openapitools.model.TimePeriod;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
@@ -13,18 +19,40 @@ import org.springframework.boot.actuate.trace.http.InMemoryHttpTraceRepository;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.time.OffsetDateTime;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"org.openapitools", "com.vodafone", "org.openapitools.configuration"})
 public class OpenAPI2SpringBoot implements CommandLineRunner {
 
+    private final CrudRepository<Catalog, String> repository;
+
+    public OpenAPI2SpringBoot(CrudRepository<Catalog, String> repository) {
+        this.repository = repository;
+    }
+
     @Override
     public void run(String... arg0) throws Exception {
         if (arg0.length > 0 && arg0[0].equals("exitcode")) {
             throw new ExitException();
+        }
+
+        String catalogId = "a315c1d2-c726-4786-94a0-f267d60d91f5";
+        Catalog sampleCatalog = new Catalog(catalogId,"catalog/" + catalogId, "", "Vodafone Smart Surveliance - SME", OffsetDateTime.now(), "GA", "Vodafone Smart Surveliance - SME", "1.0", Collections.emptyList(),  Collections.emptyList(), new TimePeriod(OffsetDateTime.now(), OffsetDateTime.now()), "IOT", URI.create("http://product-catalog-management-v2-dxl-next-microservices-bs.dxl.vodafone.it/ProductCatalogManagament/v3/productSpecification/670000305213106735"), "IOT");
+        if (!repository.existsById(catalogId)) {
+            repository.save(sampleCatalog);
         }
     }
 

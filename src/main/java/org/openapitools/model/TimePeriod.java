@@ -24,6 +24,11 @@ import javax.annotation.Generated;
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-04-11T11:10:26.067+02:00[Europe/Berlin]")
 public class TimePeriod   {
 
+  public TimePeriod(OffsetDateTime endDateTime, OffsetDateTime startDateTime) {
+    this.endDateTime = endDateTime;
+    this.startDateTime = startDateTime;
+  }
+
   @JsonProperty("endDateTime")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private OffsetDateTime endDateTime;
