@@ -1,0 +1,16 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: uk-market
+  description: The UK market
+  links:
+    - url: https://www.vodafone.co.uk
+      title: Website
+spec:
+  type: sub-department
+  profile:
+    displayName: Vodafone UK
+    email: ukmediarelations@vodafone.com
+    picture: https://www.vodafone.com/icons/group/logo-vodafone.svg
+  parent: vodafone-corp
+  children: [team-a, team-b]

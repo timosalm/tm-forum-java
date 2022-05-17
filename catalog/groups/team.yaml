@@ -1,0 +1,25 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: team-tmf-product-catalog
+  description: Team TMF Product Catalog
+spec:
+  type: team
+  profile:
+    displayName: Team TMF Product Catalog
+    email: team-tmf-product-catalog@vodafone.co.uk
+    picture: https://www.vodafone.com/icons/group/logo-vodafone.svg
+  parent: uk-market
+  children: []
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: guest
+spec:
+  profile:
+    displayName: Guest User
+    email: guest@example.com
+    picture: https://cdn.vodafone.co.uk/en/assets/images/large/IMG_Tech_Team_Tobi.jpg
+  memberOf: [team-tmf-product-catalog]

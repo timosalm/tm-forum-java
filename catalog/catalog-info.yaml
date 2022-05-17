@@ -8,6 +8,7 @@ metadata:
 spec:
   targets:
     - ./systems/tmf-apis-system.yaml
+    - ./groups/org.yaml
     - ./components/database/component-mongo.yaml
     - ./apis/api.yaml
     - ./components/service/component.yaml

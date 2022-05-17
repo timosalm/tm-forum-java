@@ -1,0 +1,25 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: vodafone-corp
+  description: The Vodafone organization
+  links:
+    - url: https://www.vodafone.com
+      title: Website
+spec:
+  type: organization
+  profile:
+    displayName: Vodafone Group Plc
+    email: GroupMedia@vodafone.com
+    picture: https://www.vodafone.com/icons/group/logo-vodafone.svg
+  children: [uk-market]
+---
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: vodafone-group
+  description: The Vodafone group
+spec:
+  targets:
+    - ./department.yaml
+    - ./team.yaml
