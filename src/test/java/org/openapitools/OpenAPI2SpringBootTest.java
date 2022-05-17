@@ -14,15 +14,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 @EnableAutoConfiguration(exclude = JpaRepositoriesAutoConfiguration.class)
 class OpenAPI2SpringBootTest {
-
-    @MockBean
-    private CatalogRepository mockRepository;
-
-    @BeforeEach
-    public void init() {
-        when(mockRepository.existsById(anyString())).thenReturn(true);
-    }
-
+    
     @Test
     void contextLoads() {
     }

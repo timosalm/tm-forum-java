@@ -11,9 +11,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.openapitools.model.Catalog;
-import org.openapitools.model.CatalogCreate;
-import org.openapitools.model.CatalogUpdate;
+import org.openapitools.model.*;
 import org.openapitools.model.Error;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
@@ -25,6 +23,8 @@ import org.springframework.web.context.request.NativeWebRequest;
 import javax.annotation.Generated;
 import javax.validation.Valid;
 import java.net.URI;
+import java.time.OffsetDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -175,6 +175,12 @@ public interface CatalogApi {
         @Parameter(name = "limit", description = "Requested number of resources to be provided in response", schema = @Schema(description = "")) @Valid @RequestParam(value = "limit", required = false) Integer limit
     ) {
         if (getRepository().isPresent()) {
+            String catalogId = "a315c1d2-c726-4786-94a0-f267d60d91f5";
+            if (! getRepository().get().existsById(catalogId)) {
+                Catalog sampleCatalog = new Catalog(catalogId,"catalog/" + catalogId, "", "Vodafone Smart Surveliance - SME", OffsetDateTime.now(), "GA", "Vodafone Smart Surveliance - SME", "1.0", Collections.emptyList(),  Collections.emptyList(), new TimePeriod(OffsetDateTime.now(), OffsetDateTime.now()), "IOT", URI.create("http://product-catalog-management-v2-dxl-next-microservices-bs.dxl.vodafone.it/ProductCatalogManagament/v3/productSpecification/670000305213106735"), "IOT");
+                getRepository().get().save(sampleCatalog);
+            }
+
             Iterable<Catalog> catalogs = getRepository().get().findAll();
             return ResponseEntity.ok(ApiUtil.toList(catalogs));
         }
