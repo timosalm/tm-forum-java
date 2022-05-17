@@ -10,7 +10,7 @@ metadata:
 spec:
   type: openapi
   lifecycle: experimental
-  owner: default-team
+  owner: team-tmf-product-catalog
   system: tmf-apis-system
   definition:
     $text: ../../src/main/resources/openapi.yaml

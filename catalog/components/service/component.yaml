@@ -14,7 +14,7 @@ metadata:
 spec:
   type: service
   lifecycle: experimental
-  owner: default-team
+  owner: team-tmf-product-catalog
   system: tmf-apis-system
   dependsOn:
     - Component:tmf-product-catalog-management-api-db

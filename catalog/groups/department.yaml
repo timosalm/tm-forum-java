@@ -13,4 +13,4 @@ spec:
     email: ukmediarelations@vodafone.com
     picture: https://www.vodafone.com/icons/group/logo-vodafone.svg
   parent: vodafone-corp
-  children: [team-a, team-b]
+  children: [team-tmf-product-catalog]

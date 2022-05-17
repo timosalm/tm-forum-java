@@ -6,4 +6,4 @@ metadata:
   annotations:
     'backstage.io/techdocs-ref': dir:.
 spec:
-  owner: default-team
+  owner: team-tmf-product-catalog
