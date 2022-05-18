@@ -36,6 +36,9 @@ import javax.annotation.Generated;
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-04-11T11:10:26.067+02:00[Europe/Berlin]")
 public class Catalog {
 
+    public Catalog() {
+    }
+
     public Catalog(String baseUri, String catalogType, String description, OffsetDateTime lastUpdate, String lifecycleStatus, String name, String version, List<CategoryRef> category, List<RelatedParty> relatedParty, TimePeriod validFor, String atBaseType, URI atSchemaLocation, String atType) {
         this.id = UUID.randomUUID().toString();
         this.href = String.format("%s/%s", baseUri, id);
