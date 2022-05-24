@@ -90,7 +90,6 @@ accelerator:
         value: remote
     - name: cnrSubdomain
       label: Deployment environment Cloud Native Runtimes subdomain
-      defaultValue: "cnr."
       display: true
       description: The TAP environment's Cloud Native Runtimes subdomain
       inputType: text
