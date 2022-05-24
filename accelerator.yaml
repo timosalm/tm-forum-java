@@ -88,6 +88,16 @@ accelerator:
       dependsOn:
         name: apiSpecLocation
         value: remote
+    - name: cnrSubdomain
+      label: Deployment environment Cloud Native Runtimes subdomain
+      defaultValue: "cnr."
+      display: true
+      description: The TAP environment's Cloud Native Runtimes subdomain
+      inputType: text
+      dataType: string
+      dependsOn:
+        name: apiSpecLocation
+        value: remote
 engine:
   merge:
   - exclude: [ "accelerator-deployment.yaml", "update-accelerator.sh", "catalog/components/database/*.yaml"]
@@ -149,7 +159,7 @@ engine:
         condition: "#apiSpecLocation == 'remote'"
         substitutions:
           - text: "../../src/main/resources/openapi.yaml"
-            with: "'https://' + #artifactId + '-' + #namespace + '.cnr.' + #ingressDomain + '/v3/api-docs.yaml'"
+            with: "'https://' + #artifactId + '-' + #namespace + '.' + #cnrSubdomain + #ingressDomain + '/v3/api-docs.yaml'"
   - include: [ "catalog/components/database/component-postgres.yaml" ]
     condition: "#database == 'postgres'"
   - include: [ "catalog/components/database/component-mongo.yaml" ]
