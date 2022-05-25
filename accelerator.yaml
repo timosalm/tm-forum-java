@@ -78,19 +78,9 @@ accelerator:
         text: Remote path
       defaultValue: "local"
       required: true
-    - name: ingressDomain
-      label: Deployment environment
-      display: true
-      description: The TAP environment the application will be deployed in
-      inputType: text
-      dataType: string
-      defaultValue: "tap.example.com"
-      dependsOn:
-        name: apiSpecLocation
-        value: remote
     - name: cnrSubdomain
       label: Deployment environment Cloud Native Runtimes subdomain
-      defaultValue: ".cnrs."
+      defaultValue: "cnrs.tap.example.com"
       display: true
       description: The TAP environment's Cloud Native Runtimes subdomain
       inputType: text
@@ -159,7 +149,7 @@ engine:
         condition: "#apiSpecLocation == 'remote'"
         substitutions:
           - text: "../../src/main/resources/openapi.yaml"
-            with: "'https://' + #artifactId + '-' + #namespace + #cnrSubdomain + #ingressDomain + '/v3/api-docs.yaml'"
+            with: "'https://' + #artifactId + '-' + #namespace + '.' + #cnrSubdomain + '/v3/api-docs.yaml'"
   - include: [ "catalog/components/database/component-postgres.yaml" ]
     condition: "#database == 'postgres'"
   - include: [ "catalog/components/database/component-mongo.yaml" ]
