@@ -25,10 +25,10 @@ spec:
           - name: source-sub-path
         steps:
           - name: test
-            image: gradle
+            image: maven:3-openjdk-11
             script: |-
               cd `mktemp -d`
 
               wget -qO- $(params.source-url) | tar xvz -m
               cd $(params.source-sub-path)
-              ./mvnw test
+              mvn test
